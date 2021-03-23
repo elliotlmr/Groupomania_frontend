@@ -1,0 +1,17 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    display: block;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 10%, rgba(218,236,255,0.9248074229691877) 50%, rgba(255,255,255,1) 90%);
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+}
+
+/* Global components CSS */
