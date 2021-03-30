@@ -1,3 +1,4 @@
+import './Homepage.scss';
 import { 
     Switch,
     Route,
@@ -10,24 +11,22 @@ import BrandLogo from '../../components/Header/BrandLogo';
 import SearchBar from '../../components/Header/SearchBar';
 import Menu from '../../components/Header/Menu';
 import CreatePost from '../../components/Main/CreatePost';
-import MainPost from '../../components/Main/MainPost';
+import PostsList from '../../components/Main/PostsList';
 import FooterMenu from '../../components/Footer/FooterMenu';
 
 
 function Homepage() {
 
-    let { path } = useRouteMatch();
-
     return (
-        <Container fluid className='page-container'>
+        <Container fluid className='page-container homepage'>
             <Row className='logs-header mb-1 pt-2'>
-                <Col xs={6} sm={6} md={4}>
+                <Col xs={6} sm={6} md={3}>
                     <BrandLogo />
                 </Col>
                 <Col>
-                    <SearchBar />
+                    <SearchBar md={6} />
                 </Col>
-                <Col xs={6} sm={6} md={4}>
+                <Col xs={6} sm={6} md={3}>
                     <Menu />
                 </Col>
             </Row>
@@ -36,12 +35,12 @@ function Homepage() {
                 <Col md={3} className='text-center'>
                     <Badge pill variant='dark'> Votre dernier post : </Badge>
                 </Col>
-                <Col md={6}>
+                <Col md={6} className='px-5'>
                     <Row>
-                        <CreatePost />
+                        <CreatePost profilePicture='PPTest' />
                     </Row>
-                    <Row className='mt-3'>
-                        <MainPost /> //Faire un compo liste qui récup tous les json (cf )
+                    <Row className='mt-3 justify-content-center'>
+                        <PostsList />
                     </Row>
                 </Col>
                 <Col md={3} className='text-center'>
@@ -50,7 +49,7 @@ function Homepage() {
             </Row>
 
             <Row className='home-footer fixed-bottom'>
-                <Col md={12}>
+                <Col md={4}>
                     <FooterMenu />
                 </Col>
             </Row>

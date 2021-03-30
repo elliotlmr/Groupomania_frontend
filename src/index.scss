@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'Croissant';
+    src: local('Croissant'),
+    url(./fonts/croissantone-regular.ttf) format('truetype');
+}
+
+* {
+    font-family: 'Croissant';
+}
+
 html, body {
     height: 100%;
 }

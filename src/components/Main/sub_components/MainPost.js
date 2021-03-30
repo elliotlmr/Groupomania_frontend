@@ -1,3 +1,4 @@
+import "./MainPost.scss";
 import {
   Card,
   Image,
@@ -7,21 +8,56 @@ import {
   FormControl,
   Col,
 } from "react-bootstrap";
+import CommentsList from "./CommentsList";
+import axios from "axios";
+import { useState } from "react";
 
-function MainPost() {
+//Accepte en props : author, dexcription, mediaUrl (+ comments à définir)
+
+function MainPost(props) {
+  const userStorage = localStorage.getItem("user");
+  const user = JSON.parse(userStorage);
+  const [comment, setComment] = useState("");
+
+  function commentIsValid() {
+    return comment.length > 1;
+  }
+
+  function handleComment(event) {
+    event.preventDefault();
+
+    axios.post(
+      `http://localhost:1331/api/posts/${props.postId}/comments/`,
+      {
+        user_id: user.userId,
+        comment_text: comment,
+        postId: props.postId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((error) => console.log(error));
+  }
+
   return (
-    <Card className="w-100">
+    <Card className="w-100 main-post mb-4" id={props.id}>
       <Card.Body>
         <Row>
-          <Image />
-          <Card.Title> USER NAME </Card.Title>
+          <Image src={props.profilePicture} />
+          <Card.Title> {props.author} </Card.Title>
         </Row>
-        <Card.Text> POST TEXT </Card.Text>
-        <Image />
+        <Card.Text> {props.description} </Card.Text>
+        <Image src={props.mediaUrl} />
       </Card.Body>
       <Card.Footer className="pt-0">
         <Row className="my-2">
-          <Col>COMMENTS</Col>
+          <Col> Commentaires : </Col>
           <Col className="text-right">
             <Button type="button" className="mx-1">
               <svg
@@ -33,7 +69,7 @@ function MainPost() {
                 viewBox="0 0 16 16"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                 />
               </svg>
@@ -52,14 +88,24 @@ function MainPost() {
             </Button>
           </Col>
         </Row>
+        <Row className="justify-content-center">
+          <CommentsList postId={props.postId} />
+        </Row>
         <Row>
           <InputGroup>
             <FormControl
               placeholder="Votre commentaire .."
               aria-label="Votre commentaire .."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
             />
             <InputGroup.Append>
-              <Button variant="outline-secondary">
+              <Button
+                variant="outline-secondary"
+                type="button"
+                onClick={handleComment}
+                disabled={!commentIsValid()}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
