@@ -8,7 +8,9 @@ import Comment from './Comment';
 function CommentsList(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
-  const [comments, setComments] = useState([]);
+  const {comments} = props;
+  console.log(props);
+  /*const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -22,15 +24,24 @@ function CommentsList(props) {
     };
 
     fetchPosts();
-  }, []);
+  }, []);*/
+
+  const updateComments = dataToUpdate => {
+    let newComment = comments.find(d => d.id == dataToUpdate.id);
+    comments = {...newComment, ...dataToUpdate};
+
+    //setComments(comments);
+  }
 
   return (
-    <Row className="mt-3 w-100">
+    <Row className="mt-3 w-100" /*update={updateComments}*/>
       {comments.map((item) => (
         <Comment
           key={item.id}
-          id={item.id}
-          author={item.user_id}
+          commentId={item.id}
+          postId={item.postId}
+          authorId={item.user_id}
+          author={'Nom auteur à définir'}
           comment={item.text}
         />
       ))}

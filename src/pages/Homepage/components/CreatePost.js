@@ -1,13 +1,13 @@
 import "./CreatePost.scss";
-import axios from 'axios';
+import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import FileInput from "./sub_components/FileInput";
-import Picker from 'react-giphy-picker';
+import FileInput from "../../../globals/components/FileInput";
+import Picker from "react-giphy-picker";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
@@ -16,19 +16,28 @@ import { useState } from "react";
 function CreatePost(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
+  const [selectedFile, setSelectedFile] = useState();
 
   function handleSubmit(event) {
     event.preventDefault();
+    const mediaUrl = new FormData();
+
+    mediaUrl.append('File', selectedFile);
 
     axios
-      .post("http://localhost:1331/api/posts", {
-        description,
-      }, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
+      .post(
+        "http://localhost:1331/api/posts",
+        {
+          description,
+          mediaUrl,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
         }
-      })
+      )
       .then((res) => {
         console.log(res.data);
       })
@@ -40,8 +49,8 @@ function CreatePost(props) {
       <Card.Header className="d-flex pb-0">
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
-            <Col xs={6} md={2}>
-              <Image src={props.profilePicture} roundedCircle />
+            <Col xs={6} md={2} className='pl-0'>
+              <Image src={props.profilePicture} roundedCircle className='profile-picture mr-2' />
             </Col>
           </InputGroup.Prepend>
           <FormControl
@@ -54,15 +63,19 @@ function CreatePost(props) {
           />
         </InputGroup>
       </Card.Header>
-      <Card.Body as={Row} className='btn-row'>
-        <Col>
-          <Button type='button'> GIF </Button>
+      <Card.Body as={Row} className="btn-row">
+        <Col className="d-flex flex-row">
+          <Button type="button"> GIF </Button>
+          <FileInput
+            name="Photos"
+            text="Photos"
+            id="photos-input"
+            accept=".jpg, .jpeg, .png, .gif"
+            onChange={(e) => setSelectedFile(e.target.files[0])}
+          />
         </Col>
         <Col>
-          <FileInput text="Photo / Image" />
-        </Col>
-        <Col>
-          <Button type='button' onClick={handleSubmit}>
+          <Button type="button" onClick={handleSubmit}>
             Publier !
           </Button>
         </Col>

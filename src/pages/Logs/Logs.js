@@ -5,16 +5,18 @@ import {
     useParams,
     useRouteMatch
 } from 'react-router-dom';
+import {withRouter} from 'react-router';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Logs.scss';
 
 //Components
-import BrandLogo from '../../components/Header/BrandLogo';
-import LogMenu from '../../components/Header/LogMenu';
-import LoginCard from '../../components/Main/LoginCard';
-import SignupCard from '../../components/Main/SignupCard';
+import BrandLogo from '../../globals/Header/BrandLogo';
+import LogMenu from './components/LogMenu';
+import LoginCard from './components/LoginCard';
+import SignupCard from './components/SignupCard';
+import FooterMenu from '../../globals/Footer/FooterMenu';
 
-function Logs() {
+function Logs(props) {
 
     let { path } = useRouteMatch();
 
@@ -42,15 +44,13 @@ function Logs() {
                 </Col>
             </Row>
 
-            <Row className='logs-footer mt-auto'>
-                <Col md={12}>
-                    <p>
-                        footer
-                    </p>
+            <Row className='logs-footer fixed-bottom'>
+                <Col md={4}>
+                    <FooterMenu />
                 </Col>
             </Row>
         </Container>
     );
 }
 
-export default Logs;
+export default withRouter(Logs);

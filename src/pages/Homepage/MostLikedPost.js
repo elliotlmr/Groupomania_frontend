@@ -1,56 +1,28 @@
-import "./MainPost.scss";
-import {
-  Card,
-  Image,
-  Button,
-  Row,
-  InputGroup,
-  FormControl,
-  Col,
-} from "react-bootstrap";
-import CommentsList from "./CommentsList";
-import axios from "axios";
-import { useState } from "react";
-
-//Accepte en props : author, dexcription, mediaUrl (+ comments à définir)
-
-function MainPost(props) {
-  const userStorage = localStorage.getItem("user");
-  const user = JSON.parse(userStorage);
-  const [comment, setComment] = useState("");
-
-  function commentIsValid() {
-    return comment.length > 1;
-  }
-
-  function handleComment(event) {
-    event.preventDefault();
-
-    axios.post(
-      `http://localhost:1331/api/posts/${props.postId}/comments/`,
-      {
-        user_id: user.userId,
-        comment_text: comment,
-        postId: props.postId,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
-    )
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((error) => console.log(error));
-  }
-
+function MostLikedPost() {
   return (
     <Card className="w-100 main-post mb-4" id={props.id}>
       <Card.Body>
-        <Row>
-          <Image src={props.profilePicture} />
-          <Card.Title> {props.author} </Card.Title>
+        <Row className="justify-content-between">
+          <Col className="d-flex flex-row align-items-center mb-2" md={10}>
+            <Image
+              src={props.profilePicture}
+              roundedCircle
+              className="profile-picture-post mr-4"
+            />
+            <Card.Title className="my-auto"> {props.author} </Card.Title>
+          </Col>
+          <Col>
+            {userIsAuthor() && (
+              <Dropdown>
+                <Dropdown.Toggle variant="secondary" id="author-options" />
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Button} onClick={deletePost}>
+                    Supprimer
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            )}
+          </Col>
         </Row>
         <Card.Text> {props.description} </Card.Text>
         <Image src={props.mediaUrl} />
@@ -59,7 +31,7 @@ function MainPost(props) {
         <Row className="my-2">
           <Col> Commentaires : </Col>
           <Col className="text-right">
-            <Button type="button" className="mx-1">
+            <Button type="button" className="like-btn mx-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -74,7 +46,7 @@ function MainPost(props) {
                 />
               </svg>
             </Button>
-            <Button type="button" className="mx-1">
+            <Button type="button" className="share-btn mx-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -88,9 +60,6 @@ function MainPost(props) {
             </Button>
           </Col>
         </Row>
-        <Row className="justify-content-center">
-          <CommentsList postId={props.postId} />
-        </Row>
         <Row>
           <InputGroup>
             <FormControl
@@ -103,7 +72,10 @@ function MainPost(props) {
               <Button
                 variant="outline-secondary"
                 type="button"
-                onClick={handleComment}
+                onClick={(e) => {
+                  handleComment();
+                  //updateComments({ id: props.postId });
+                }}
                 disabled={!commentIsValid()}
               >
                 <svg
@@ -124,5 +96,3 @@ function MainPost(props) {
     </Card>
   );
 }
-
-export default MainPost;

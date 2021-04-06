@@ -7,15 +7,17 @@ import {
     useRouteMatch
 } from 'react-router-dom';
 import { Container, Row, Col, Badge } from 'react-bootstrap';
-import BrandLogo from '../../components/Header/BrandLogo';
-import SearchBar from '../../components/Header/SearchBar';
-import Menu from '../../components/Header/Menu';
-import CreatePost from '../../components/Main/CreatePost';
-import PostsList from '../../components/Main/PostsList';
-import FooterMenu from '../../components/Footer/FooterMenu';
+import BrandLogo from '../../globals/Header/BrandLogo';
+import SearchBar from '../../globals/Header/SearchBar';
+import Menu from '../../globals/Header/Menu';
+import CreatePost from './components/CreatePost';
+import PostsList from './components/Posts/PostsList';
+import FooterMenu from '../../globals/Footer/FooterMenu';
 
 
 function Homepage() {
+    const userStorage = localStorage.getItem("user");
+    const user = JSON.parse(userStorage);
 
     return (
         <Container fluid className='page-container homepage'>
@@ -37,7 +39,7 @@ function Homepage() {
                 </Col>
                 <Col md={6} className='px-5'>
                     <Row>
-                        <CreatePost profilePicture='PPTest' />
+                        <CreatePost profilePicture={user.profile_picture} />
                     </Row>
                     <Row className='mt-3 justify-content-center'>
                         <PostsList />

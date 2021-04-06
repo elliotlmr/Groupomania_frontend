@@ -39,6 +39,7 @@ function SignupCard() {
       })
       .then((res) => {
         console.log(res);
+        window.location = '/';
       });
   }
 

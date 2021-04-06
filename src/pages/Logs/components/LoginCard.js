@@ -11,10 +11,11 @@ import {
   Switch,
   useHistory,
 } from "react-router-dom";
+import {withRouter} from 'react-router';
 import { useState } from "react";
 import axios from "axios";
 
-function LoginCard() {
+function LoginCard(props) {
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,8 +35,7 @@ function LoginCard() {
       .then((res) => {
         console.log(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
-        history.push("/home");
-        console.log(history);
+        history.push('/home');
       })
       .catch((error) => console.log(error));
   }
@@ -105,4 +105,4 @@ function LoginCard() {
   );
 }
 
-export default LoginCard;
+export default withRouter(LoginCard);

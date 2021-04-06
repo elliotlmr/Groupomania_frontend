@@ -10,7 +10,7 @@ function Menu() {
 
   function handleLogout() {
     localStorage.clear();
-    history.push('/signup');
+    window.location = '/';
   }
 
   return (

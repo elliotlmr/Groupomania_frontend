@@ -1,4 +1,4 @@
-@import '../../../variables';
+@import '../../variables';
 
 .file-input {
     opacity: 0;
@@ -13,19 +13,16 @@
     justify-content: center;
     background-color: $primary-color;
     color: $secondary-color;
-    width: 8rem;
-    height: 2rem;
+    width: 100px;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.long-file {
+    font-size: 0.7rem;
 }
 
 .file-input:focus + .file-label {
     outline: 1px solid $cool-color;
     outline: -webkit-focus-ring-color auto 2px;
 }
-
-.file-name {
-    position: absolute;
-    bottom: -35px;
-    left: 10px;
-    font-size: 0.85rem;
-    color: $primary-color;
-  }
