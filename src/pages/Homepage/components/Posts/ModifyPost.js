@@ -2,14 +2,14 @@ import { useState } from "react";
 import { FormControl, InputGroup, Button } from "react-bootstrap";
 import axios from "axios";
 
-function ModifyComment(props) {
+function ModifyPost(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
-  const [comment, setComment] = useState("");
+  const [newText, setNewText] = useState("");
   const { finishModify } = props;
 
-  function commentIsValid() {
-    return comment.length > 1;
+  function textIsValid() {
+    return newText.length > 1;
   }
 
   function handleModify(e) {
@@ -17,9 +17,9 @@ function ModifyComment(props) {
 
     axios
       .put(
-        `http://localhost:1331/api/posts/${props.postId}/comments/${props.commentId}`,
+        `http://localhost:1331/api/posts/${props.postId}`,
         {
-          comment_text: comment,
+          description: newText,
         },
         {
           headers: {
@@ -39,15 +39,15 @@ function ModifyComment(props) {
       <FormControl
         placeholder={props.placeholder}
         aria-label="Modifiez votre commentaire .."
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
+        value={newText}
+        onChange={(e) => setNewText(e.target.value)}
       />
       <InputGroup.Append>
         <Button
           variant="outline-secondary"
           type="button"
           onClick={(e) => handleModify(e)}
-          disabled={!commentIsValid()}
+          disabled={!textIsValid()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -65,4 +65,4 @@ function ModifyComment(props) {
   );
 }
 
-export default ModifyComment;
+export default ModifyPost;

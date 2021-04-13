@@ -18,6 +18,7 @@ function CreatePost(props) {
   const user = JSON.parse(userStorage);
   const [description, setDescription] = useState("");
   const [selectedFile, setSelectedFile] = useState();
+  const {updatePosts} = props;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -31,6 +32,7 @@ function CreatePost(props) {
         {
           description,
           mediaUrl,
+          user: user,
         },
         {
           headers: {
@@ -39,13 +41,14 @@ function CreatePost(props) {
         }
       )
       .then((res) => {
+        updatePosts();
         console.log(res.data);
       })
       .catch((error) => console.log(error));
   }
 
   return (
-    <Card className="w-100 mx-auto create-post">
+    <Card className="w-100 create-post">
       <Card.Header className="d-flex pb-0">
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
@@ -65,7 +68,7 @@ function CreatePost(props) {
       </Card.Header>
       <Card.Body as={Row} className="btn-row">
         <Col className="d-flex flex-row">
-          <Button type="button"> GIF </Button>
+          <Button type="button" className='mr-3'> GIF </Button>
           <FileInput
             name="Photos"
             text="Photos"
@@ -74,7 +77,7 @@ function CreatePost(props) {
             onChange={(e) => setSelectedFile(e.target.files[0])}
           />
         </Col>
-        <Col>
+        <Col className='text-right'>
           <Button type="button" onClick={handleSubmit}>
             Publier !
           </Button>

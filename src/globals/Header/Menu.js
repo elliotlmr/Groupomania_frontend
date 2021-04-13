@@ -6,6 +6,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Redirect, useHistory } from "react-router-dom";
 
 function Menu() {
+  const userStorage = localStorage.getItem("user");
+  const user = JSON.parse(userStorage);
   const history = useHistory();
 
   function handleLogout() {
@@ -21,7 +23,7 @@ function Menu() {
           <LinkContainer to="/home">
             <Nav.Link> Accueil </Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/profile">
+          <LinkContainer to={`/profile/${user.userId}`}>
             <Nav.Link> Profile </Nav.Link>
           </LinkContainer>
           <NavDropdown title="Options" id="basic-nav-dropdown">

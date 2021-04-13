@@ -32,7 +32,7 @@ function Logs(props) {
             </Row>
 
             <Row className='logs-main align-items-center justify-content-center'>
-                <Col md={{ span: 6}}>
+                <Col md={{ span: 6}} className='text-center'>
                     <Switch>
                         <Route path={`/signup`}>
                             <SignupCard />
