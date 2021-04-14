@@ -1,6 +1,7 @@
 import "./CreatePost.scss";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
+import Form from 'react-bootstrap/Form';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
@@ -17,14 +18,14 @@ function CreatePost(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
   const [description, setDescription] = useState("");
-  const [selectedFile, setSelectedFile] = useState();
+  const [newFile, setNewFile] = useState();
   const {updatePosts} = props;
 
   function handleSubmit(event) {
     event.preventDefault();
     const mediaUrl = new FormData();
 
-    mediaUrl.append('File', selectedFile);
+    mediaUrl.append('File', newFile);
 
     axios
       .post(
@@ -48,7 +49,7 @@ function CreatePost(props) {
   }
 
   return (
-    <Card className="w-100 create-post">
+    <Card className="w-100 create-post" encType='multipart/form-data'>
       <Card.Header className="d-flex pb-0">
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
@@ -70,11 +71,12 @@ function CreatePost(props) {
         <Col className="d-flex flex-row">
           <Button type="button" className='mr-3'> GIF </Button>
           <FileInput
-            name="Photos"
+            filename="media"
             text="Photos"
             id="photos-input"
             accept=".jpg, .jpeg, .png, .gif"
-            onChange={(e) => setSelectedFile(e.target.files[0])}
+            newFile={newFile}
+            setNewFile={setNewFile}
           />
         </Col>
         <Col className='text-right'>
