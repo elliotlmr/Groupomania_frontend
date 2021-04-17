@@ -1,7 +1,7 @@
 import "./CreatePost.scss";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
@@ -19,28 +19,24 @@ function CreatePost(props) {
   const user = JSON.parse(userStorage);
   const [description, setDescription] = useState("");
   const [newFile, setNewFile] = useState();
-  const {updatePosts} = props;
+  const { updatePosts } = props;
 
   function handleSubmit(event) {
     event.preventDefault();
-    const mediaUrl = new FormData();
+    const formData = new FormData();
 
-    mediaUrl.append('File', newFile);
+    formData.append("File", newFile);
+    formData.append("description", description);
+    for (var key of formData.entries()) {
+      console.log(key[0] + ", " + key[1]);
+    }
 
     axios
-      .post(
-        "http://localhost:1331/api/posts",
-        {
-          description,
-          mediaUrl,
-          user: user,
+      .post("http://localhost:1331/api/posts", formData, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      )
+      })
       .then((res) => {
         updatePosts();
         console.log(res.data);
@@ -49,12 +45,16 @@ function CreatePost(props) {
   }
 
   return (
-    <Card className="w-100 create-post" encType='multipart/form-data'>
+    <Card className="w-100 create-post" encType="multipart/form-data">
       <Card.Header className="d-flex pb-0">
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
-            <Col xs={6} md={2} className='pl-0'>
-              <Image src={props.profilePicture} roundedCircle className='profile-picture mr-2' />
+            <Col xs={6} md={2} className="pl-0">
+              <Image
+                src={props.profilePicture}
+                roundedCircle
+                className="profile-picture mr-2"
+              />
             </Col>
           </InputGroup.Prepend>
           <FormControl
@@ -69,7 +69,10 @@ function CreatePost(props) {
       </Card.Header>
       <Card.Body as={Row} className="btn-row">
         <Col className="d-flex flex-row">
-          <Button type="button" className='mr-3'> GIF </Button>
+          <Button type="button" className="mr-3">
+            {" "}
+            GIF{" "}
+          </Button>
           <FileInput
             filename="media"
             text="Photos"
@@ -79,7 +82,7 @@ function CreatePost(props) {
             setNewFile={setNewFile}
           />
         </Col>
-        <Col className='text-right'>
+        <Col className="text-right">
           <Button type="button" onClick={handleSubmit}>
             Publier !
           </Button>

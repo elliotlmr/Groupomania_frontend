@@ -8,17 +8,20 @@ import {
   FormControl,
   Col,
   Dropdown,
+  Modal,
 } from "react-bootstrap";
 import ModifyPost from "./ModifyPost";
 import CommentsList from "./CommentsList";
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 //Accepte en props : id, authorId, postId, profilePicture, author, dexcription, mediaUrl.
 
 function MainPost(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
+  const [showImage, setShowImage] = useState(false);
   const [comment, setComment] = useState("");
   const [displayComments, setDisplayComments] = useState(false);
   const [deleted, setDeleted] = useState(false);
@@ -65,6 +68,9 @@ function MainPost(props) {
     setModify(false);
   };
 
+  const toggleImage = () => setShowImage(true);
+  const closeImage = () => setShowImage(false);
+
   function toggleComments(e) {
     e.preventDefault();
 
@@ -109,7 +115,7 @@ function MainPost(props) {
             headers: {
               Authorization: `Bearer ${user.token}`,
             },
-          },
+          }
         )
         .then((res) => {
           console.log(res.data);
@@ -128,7 +134,7 @@ function MainPost(props) {
             headers: {
               Authorization: `Bearer ${user.token}`,
             },
-          },
+          }
         )
         .then((res) => {
           console.log(res.data);
@@ -140,6 +146,27 @@ function MainPost(props) {
 
   return (
     <>
+      <Modal show={showImage} onHide={closeImage} className='modal-container'>
+        <button
+          type="button"
+          name="Close Image"
+          className="delete-btn ml-auto close-btn"
+          onClick={closeImage}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            className="bi bi-x-square"
+            viewBox="0 0 16 16"
+            id="delete-button"
+          >
+            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+          </svg>
+        </button>
+        <Image src={props.mediaUrl} className="modal-image" />
+      </Modal>
       {deleted ? ( //Lorsque le post est 'deleted', renvoie une Card modifiée.
         <Card className="w-100 main-post mb-4" id={props.id}>
           <Card.Body>
@@ -161,7 +188,9 @@ function MainPost(props) {
                   roundedCircle
                   className="profile-picture-post mr-4"
                 />
-                <Card.Title className="my-auto"> {props.author} </Card.Title>
+                <Link to={`/profile/${props.authorId}`}>
+                  <Card.Title className="my-auto"> {props.author} </Card.Title>
+                </Link>
               </Col>
               <Col
                 sm={4}
@@ -212,7 +241,11 @@ function MainPost(props) {
               </Col>
             </Row>
             {modify ? (
-              <ModifyPost postId={props.postId} finishModify={finishModify} placeholder={props.description} />
+              <ModifyPost
+                postId={props.postId}
+                finishModify={finishModify}
+                placeholder={props.description}
+              />
             ) : (
               <Card.Text className="text-left">
                 {isModified.description
@@ -220,7 +253,11 @@ function MainPost(props) {
                   : props.description}
               </Card.Text>
             )}
-            <Image src={props.mediaUrl} />
+            <Image
+              src={props.mediaUrl}
+              className="w-100"
+              onClick={toggleImage}
+            />
           </Card.Body>
           <Card.Footer className="pt-0">
             <Row className="my-2">

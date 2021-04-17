@@ -48,26 +48,22 @@ function Homepage() {
       })
       .catch((error) => console.log(error));
 
-    setLoaded(true);
+    if (lastPost && mostLikedPost) {
+      setLoaded(true);
+    }
   }, []);
-
-  console.log("mostliked", mostLikedPost);
-  console.log("lastpost", lastPost);
-  console.log(loaded);
 
   const updateComments = (postId, comment) => {
     if (postId == lastPost.id) {
-      let update = {...lastPost};
+      let update = { ...lastPost };
       update.comments = update.comments.concat([comment]);
       setLastPost(update);
     }
     if (postId == mostLikedPost.id) {
-      let update = {...mostLikedPost};
+      let update = { ...mostLikedPost };
       update.comments = update.comments.concat([comment]);
       setMostLikedPost(update);
     }
-    console.log("update", lastPost);
-    console.log("up", mostLikedPost);
   };
 
   return (
@@ -76,7 +72,7 @@ function Homepage() {
         <Col xs={6} sm={6} md={3}>
           <BrandLogo />
         </Col>
-        <Col className='align-self-center'>
+        <Col className="align-self-center">
           <SearchBar md={6} />
         </Col>
         <Col xs={6} sm={6} md={3}>
@@ -89,8 +85,7 @@ function Homepage() {
           <Badge pill variant="dark" className="mb-4">
             Votre dernier post :
           </Badge>
-          <button onClick={() => console.log("test", lastPost)}>click</button>
-          {loaded && (
+          {loaded && lastPost && (
             <Post
               key={lastPost.id ? lastPost.id : "dynamicKey"}
               id={lastPost.id}
@@ -112,7 +107,7 @@ function Homepage() {
                 lastPost.comments ? lastPost.comments.length : "0"
               }
               comments={lastPost.comments ? lastPost.comments : []}
-              likesNumber={lastPost.likes ? lastPost.likes : '' }
+              likesNumber={lastPost.likes ? lastPost.likes : ""}
               updateComments={updateComments}
             />
           )}
@@ -126,7 +121,7 @@ function Homepage() {
           <Badge pill variant="dark" className="mb-4">
             Post le plus aimé :
           </Badge>
-          {loaded && (
+          {loaded && mostLikedPost && (
             <Post
               key={mostLikedPost.id ? mostLikedPost.id : "dynamicKey"}
               id={mostLikedPost.id}
@@ -148,7 +143,7 @@ function Homepage() {
                 mostLikedPost.comments ? mostLikedPost.comments.length : "0"
               }
               comments={mostLikedPost.comments ? mostLikedPost.comments : []}
-              likesNumber={mostLikedPost.likes ? mostLikedPost.likes : '' }
+              likesNumber={mostLikedPost.likes ? mostLikedPost.likes : ""}
               updateComments={updateComments}
             />
           )}

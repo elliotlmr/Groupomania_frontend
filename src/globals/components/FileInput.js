@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./FileInput.scss";
 
-function FileInput(props, {newFile, setNewFile}) {
+function FileInput(props/*{newFile, setNewFile}*/) {
   //const [newFile, setNewFile] = useState();
   //const [isSelected, setIsSelected] = useState(false);
   //const { getFile } = props;
 
   const handleChange = (event) => {
-    setNewFile(event.target.files[0]);   
+    props.setNewFile(event.target.files[0]);   
   };
 
   return (
@@ -20,24 +20,23 @@ function FileInput(props, {newFile, setNewFile}) {
       >
         <input
           type="file"
-          name={props.filename}
-          id={props.id}
+          name='media'
+          id='photos-input'
           accept={props.accept}
           className="file-input"
           onChange={(event) => handleChange(event)}
         />
         <label
           className={
-            newFile && newFile.name.length > 10
-              ? "file-label long-file"
-              : "file-label"
+            props.newFile && props.newFile.name.length > 9
+              ? `${props.class} file-label long-file`
+              : `${props.class} file-label`
           }
-          htmlFor={props.id}
+          htmlFor='photos-input'
         >
-          {newFile ? `${newFile.name.substr(0, 13)} ...` : props.text}
+          {props.newFile ? `${props.newFile.name.substr(0, 13)} ...` : props.text}
         </label>
       </form>
-      <button onClick={() => console.log(newFile)} />
     </>
   );
 }

@@ -5,7 +5,7 @@ import './BrandLogo.scss';
 
 function BrandLogo() {
     return (
-        <LinkContainer to='/homepage'>
+        <LinkContainer to='/home'>
             <Navbar.Brand>
                 <Image src={logo} fluid id='brand-logo' />
             </Navbar.Brand>
