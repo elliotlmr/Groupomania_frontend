@@ -16,6 +16,10 @@ import Parameters from './pages/Parameters/Parameters';
 const history = createBrowserHistory();
 
 function App() {
+  //console.log(window.Headers.get('Status Code'));
+  function isTimeout() {
+    return Response.status(440);
+  }
 
   return (
     <Router>

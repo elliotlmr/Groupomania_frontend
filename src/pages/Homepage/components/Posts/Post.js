@@ -99,6 +99,7 @@ function MainPost(props) {
       .then((res) => {
         updateComments(props.postId, res.data);
         console.log(res.data);
+        setComment('');
       })
       .catch((error) => console.log(error));
   }

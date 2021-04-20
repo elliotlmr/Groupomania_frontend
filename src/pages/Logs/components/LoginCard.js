@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import Spinner from 'react-bootstrap/Spinner';
+import Spinner from "react-bootstrap/Spinner";
 import {
   Link,
   useRouteMatch,
@@ -21,6 +21,7 @@ function LoginCard(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   function isValid() {
     return email.length > 0 && password.length > 0;
@@ -43,13 +44,17 @@ function LoginCard(props) {
       .catch((error) => {
         console.log(error);
         setIsLoading(false);
+        setPassword('');
+        if (error.response.status == 401) {
+          setError(true);
+        }
       });
   }
 
   return (
     <>
       {isLoading ? (
-        <Spinner animation="border" className='mx-auto' />
+        <Spinner animation="border" className="mx-auto" />
       ) : (
         <Card className="login-card w-75 mx-auto">
           <Card.Body>
@@ -94,6 +99,8 @@ function LoginCard(props) {
                     />
                   </Col>
                 </Form.Group>
+
+                {error && <p className="error-msg">Mot de passe incorrect !</p>}
 
                 <Button
                   variant="primary"

@@ -15,9 +15,18 @@ function PostsList() {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
+      })
+      .then(res => {
+        setPosts(res.data)})
+      .catch(error => {
+        console.log(error);
+        if (error.response.status == 401) {
+          localStorage.clear();
+          window.location = '/';
+        }
       });
 
-      setPosts(result.data);
+      //setPosts(result.data);
     };
 
     fetchPosts();
@@ -53,7 +62,7 @@ function PostsList() {
           updatePosts={updatePosts}
         />
       </Row>
-      <Row>
+      <Row className='w-100 mx-auto'>
         {posts.map((post) => (
           <Post
             key={post.id ? post.id : 'dynamicKey' }

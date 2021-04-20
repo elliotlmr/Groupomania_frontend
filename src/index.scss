@@ -1,27 +1,33 @@
 @font-face {
-    font-family: 'Croissant';
-    src: local('Croissant'),
-    url(./fonts/croissantone-regular.ttf) format('truetype');
+  font-family: "Croissant";
+  src: local("Croissant"),
+    url(./fonts/croissantone-regular.ttf) format("truetype");
 }
 
 * {
-    font-family: 'Croissant';
+  font-family: "Croissant";
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    display: block;
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 10%, rgba(218,236,255,0.9248074229691877) 50%, rgba(255,255,255,1) 90%);
+  margin: 0;
+  display: block;
+  background: rgb(45, 229, 255);
+  background: fixed linear-gradient(
+    0deg,
+    rgba(45, 229, 255, 0.29735644257703087) 5%,
+    rgba(215, 230, 255, 0.7511379551820728) 50%,
+    rgba(255, 255, 255, 0.3925945378151261) 100%
+  );
 }
 
 #root {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 /* Global components CSS */

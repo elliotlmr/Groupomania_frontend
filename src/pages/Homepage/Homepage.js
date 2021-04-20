@@ -68,20 +68,20 @@ function Homepage() {
 
   return (
     <Container fluid className="page-container homepage">
-      <Row className="logs-header mb-1 pt-2">
-        <Col xs={6} sm={6} md={3}>
+      <Row className="home-header mb-1 pt-2">
+        <Col xs={6} sm={6} md={4} xl={3} className='d-flex logo-header'>
           <BrandLogo />
         </Col>
-        <Col className="align-self-center">
-          <SearchBar md={6} />
+        <Col className="align-self-center search-bar">
+          <SearchBar md={4} xl={6}/>
         </Col>
-        <Col xs={6} sm={6} md={3}>
+        <Col xs={6} sm={6} md={4} xl={3} className='menu'>
           <Menu />
         </Col>
       </Row>
 
-      <Row className="logs-main justify-content-center">
-        <Col md={3} className="text-center">
+      <Row className="home-main justify-content-center">
+        <Col md={3} className="text-center side-posts">
           <Badge pill variant="dark" className="mb-4">
             Votre dernier post :
           </Badge>
@@ -112,12 +112,19 @@ function Homepage() {
             />
           )}
         </Col>
-        <Col md={6} className="px-5">
+        <Col
+          xs={12}
+          md={10}
+          xl={6}
+          lg={6}
+          className="px-5 posts-list"
+          id="postsList"
+        >
           <Row className="mt-3 justify-content-center">
             <PostsList />
           </Row>
         </Col>
-        <Col md={3} className="text-center">
+        <Col md={3} className="text-center side-posts">
           <Badge pill variant="dark" className="mb-4">
             Post le plus aimé :
           </Badge>
@@ -150,8 +157,8 @@ function Homepage() {
         </Col>
       </Row>
 
-      <Row className="home-footer fixed-bottom">
-        <Col md={4}>
+      <Row className="footer fixed-bottom">
+        <Col>
           <FooterMenu />
         </Col>
       </Row>

@@ -27,6 +27,7 @@ function Parameters() {
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [userIsDeleted, setUserIsDeleted] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     axios
@@ -72,6 +73,10 @@ function Parameters() {
       .then((res) => {
         console.log(res);
         setProfilePic(res.data.profile_picture);
+        let pictureStorage = localStorage.getItem("user");
+        pictureStorage = JSON.parse(pictureStorage);
+        pictureStorage["profile_picture"] = res.data.profile_picture;
+        localStorage.setItem("user", JSON.stringify(pictureStorage));
       })
       .catch((error) => console.log(error));
   }
@@ -80,16 +85,14 @@ function Parameters() {
     e.preventDefault();
 
     axios
-      .delete(
-        `http://localhost:1331/api/auth/${user.userId}`, {
-          data: {
-            password,
-          },
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      )
+      .delete(`http://localhost:1331/api/auth/${user.userId}`, {
+        data: {
+          password,
+        },
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
       .then((res) => {
         console.log(res);
         if (res.status == 200) {
@@ -102,22 +105,23 @@ function Parameters() {
       })
       .catch((error) => {
         console.log(error);
+        setError(true);
       });
   }
 
   return (
     <Container fluid className="page-container parameters">
       <Row className="parameters-header mb-1 pt-2 justify-content-between">
-        <Col xs={6} sm={6} md={3}>
+        <Col xs={6} sm={6} md={4} xl={3} className="d-flex logo-header">
           <BrandLogo />
         </Col>
-        <Col xs={6} sm={6} md={3}>
+        <Col xs={6} sm={6} md={4} xl={3} className="menu">
           <Menu />
         </Col>
       </Row>
 
       <Row className="parameters-main justify-content-center mt-5">
-        <Col md={4}>
+        <Col md={6} xl={6} lg={4}>
           <Modal show={showDelete} onHide={handleClose}>
             <Modal.Header closeButton>
               <svg
@@ -166,6 +170,11 @@ function Parameters() {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </Form.Group>
+                  <Row className="justify-content-center">
+                    {error && (
+                      <p className="error-msg">Mot de passe incorrect !</p>
+                    )}
+                  </Row>
                 </Modal.Body>
                 <Modal.Footer className="justify-content-center">
                   <Button
@@ -244,7 +253,7 @@ function Parameters() {
       </Row>
 
       <Row className="parameters-footer fixed-bottom">
-        <Col md={4}>
+        <Col>
           <FooterMenu />
         </Col>
       </Row>

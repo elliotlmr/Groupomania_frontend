@@ -26,7 +26,7 @@ function Menu() {
           <LinkContainer to={`/profile/${user.userId}`}>
             <Nav.Link> Profile </Nav.Link>
           </LinkContainer>
-          <NavDropdown title="Options" id="basic-nav-dropdown">
+          <NavDropdown title="Options" id="dropdown-menu">
             <LinkContainer to="/parameters">
               <NavDropdown.Item> Paramètres </NavDropdown.Item>
             </LinkContainer>

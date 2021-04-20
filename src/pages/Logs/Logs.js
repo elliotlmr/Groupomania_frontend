@@ -45,7 +45,7 @@ function Logs(props) {
             </Row>
 
             <Row className='logs-footer fixed-bottom'>
-                <Col md={4}>
+                <Col>
                     <FooterMenu />
                 </Col>
             </Row>

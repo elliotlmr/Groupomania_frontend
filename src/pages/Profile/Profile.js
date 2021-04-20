@@ -1,4 +1,4 @@
-import './Profile.scss';
+import "./Profile.scss";
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import BrandLogo from "../../globals/Header/BrandLogo";
 import SearchBar from "../../globals/Header/SearchBar";
@@ -37,33 +37,33 @@ function Profile(props) {
   return (
     <Container fluid className="page-container profile">
       <Row className="profile-header mb-1 pt-2">
-        <Col xs={6} sm={6} md={3}>
+        <Col xs={6} sm={6} md={4} xl={3} className="d-flex logo-header">
           <BrandLogo />
         </Col>
-        <Col>
-          <SearchBar md={6} />
+        <Col className="align-self-center search-bar">
+          <SearchBar md={4} xl={6} />
         </Col>
-        <Col xs={6} sm={6} md={3}>
+        <Col xs={6} sm={6} md={4} xl={3} className="menu">
           <Menu />
         </Col>
       </Row>
 
       <Row className="profile-main">
-        <Col xs={8} sm={8} md={3}>
+        <Col xs={8} sm={8} md={3} className="profile-card">
           <ProfileCard
             profilePicture={userProfile.profile_picture}
             name={`${userProfile.firstname} ${userProfile.lastname}`}
             role={userProfile.company_role}
-            className='user-card'
+            className="user-card"
           />
         </Col>
-        <Col xs={8} sm={8} md={6}>
+        <Col xs={12} sm={12} md={8} xl={6} className="px-5 posts-list" id="postsList">
           {loaded && <ProfilePosts posts={userProfile.posts} />}
         </Col>
       </Row>
 
-      <Row className="profile-footer fixed-bottom">
-        <Col md={4}>
+      <Row className="footer fixed-bottom">
+        <Col>
           <FooterMenu />
         </Col>
       </Row>

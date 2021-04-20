@@ -6,3 +6,21 @@
     position: sticky!important;
     top: 20px;
 }
+
+@media (max-width: 1200px) {
+    .profile {
+        padding: 0%!important;
+    }
+
+    .profile-card {
+        display: none;
+    }
+
+    .profile-main {
+        justify-content: center;
+    }
+
+    .profile-main > .posts-list {
+        width: 60vw!important;
+    }
+}

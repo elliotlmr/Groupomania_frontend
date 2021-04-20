@@ -1,5 +1,27 @@
-
-
 .navbar-toggler {
-    margin-left: auto;
+  margin-left: auto;
+}
+
+#log-menu {
+  margin-left: auto;
+}
+
+.dropdown-menu {
+  right: 0 !important;
+  left: auto !important;
+}
+
+@media (max-width: 576px) {
+  #log-menu {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+  }
+
+  .nav-link {
+    background-color: rgba(250, 250, 250, 0.3) !important;
+    backdrop-filter: blur(2px);
+    padding-left: auto!important;
+    border-radius: 5px;
+  }
 }
