@@ -1,11 +1,19 @@
+@import "./variables";
+
 @font-face {
   font-family: "Croissant";
   src: local("Croissant"),
     url(./fonts/croissantone-regular.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto"),
+    url(./fonts/Roboto-Medium-webfont.ttf) format("truetype");
+}
+
 * {
-  font-family: "Croissant";
+  font-family: "Roboto";
 }
 
 html,
@@ -16,13 +24,8 @@ body {
 body {
   margin: 0;
   display: block;
-  background: rgb(45, 229, 255);
-  background: fixed linear-gradient(
-    0deg,
-    rgba(45, 229, 255, 0.29735644257703087) 5%,
-    rgba(215, 230, 255, 0.7511379551820728) 50%,
-    rgba(255, 255, 255, 0.3925945378151261) 100%
-  );
+  background: $secondary-color;
+  color: $blue-color;
 }
 
 #root {

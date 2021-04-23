@@ -1,9 +1,25 @@
 //Global variables for SCSS
 
-$primary-color: rgba(60,60,60 ,1);
+$primary-color: rgba(60, 60, 60, 1);
 
-$secondary-color: rgba(245,245,245 ,1);
+$primary-op: rgba(60, 60, 60, 0.3);
 
-$warm-color: rgba(255,61,0 ,1);
+$secondary-color: rgba(245, 245, 245, 1);
 
-$cool-color: rgba(38,166,154 ,1);
+$secondary-op: rgba(245, 245, 245, 0.3);
+
+$blue-color: rgba(18, 36, 65, 1);
+
+$blue-op: rgba(18, 36, 65, 0.1);
+
+$blue-light: rgba(24, 66, 133, 1);
+
+$warm-color: rgba(209, 81, 90, 1);
+
+$warm-op: rgba(209, 81, 90, 0.5);
+
+$cool-color: rgba(38, 166, 154, 1);
+
+$light-shadow: 1px 1px rgba(245, 245, 245, 0.3);
+
+$dark-shadow: 1px 1px rgba(18, 36, 65, 0.3);

@@ -1,21 +1,36 @@
+@import '../../../../variables';
+
+.comment-author {
+  color: $blue-light!important;
+}
+
+.comment-body {
+  margin-top: 10px;
+  padding: 10px 20px!important;
+}
+
+.comment-body > .card-text {
+  margin-left: 10px;
+}
+
 .delete-btn {
-    background-color: rgba(250, 250, 250, 0.3);
-    width: auto;
-    height: auto;
-    border: none;
+  background-color: transparent;
+  width: auto;
+  height: auto;
+  border: none;
 }
 
 #delete-button:hover {
-    border: 2px solid rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.3);
 }
 
 .modify-btn {
-    background-color: rgba(250, 250, 250, 0.3);
-    width: auto;
-    height: auto;
-    border: none;
+  background-color: rgba(250, 250, 250, 0.3);
+  width: auto;
+  height: auto;
+  border: none;
 }
 
 #modify-button:hover {
-    border: 2px solid rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.3);
 }

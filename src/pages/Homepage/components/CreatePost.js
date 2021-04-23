@@ -1,18 +1,16 @@
 import "./CreatePost.scss";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
-import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import FileInput from "../../../globals/components/FileInput";
-import Picker from "react-giphy-picker";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
-//Accepte comme props : profilePicture
+//Accepte comme props : profilePicture.
 
 function CreatePost(props) {
   const userStorage = localStorage.getItem("user");
@@ -41,7 +39,7 @@ function CreatePost(props) {
         updatePosts();
         console.log(res.data);
         setNewFile();
-        setDescription('');
+        setDescription("");
       })
       .catch((error) => console.log(error));
   }
@@ -52,7 +50,7 @@ function CreatePost(props) {
 
   return (
     <Card className="w-100 create-post" encType="multipart/form-data">
-      <Card.Header className="d-flex pb-0">
+      <Card.Header className="d-flex pb-0 create-header">
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
             <Col xs={6} md={2} className="pl-0">
@@ -89,7 +87,13 @@ function CreatePost(props) {
           />
         </Col>
         <Col xs={6} className="text-right">
-          <Button type="button" name='Publier' className="publish-btn" onClick={handleSubmit} disabled={!isValid()}>
+          <Button
+            type="button"
+            name="Publier"
+            className="publish-btn"
+            onClick={handleSubmit}
+            disabled={!isValid()}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

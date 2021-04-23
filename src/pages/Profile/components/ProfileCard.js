@@ -1,8 +1,6 @@
 import { Card, Image } from "react-bootstrap";
 
 function ProfileCard(props) {
-  const { userId } = props;
-
   return (
     <Card className={props.className}>
       <Card.Header className="d-flex">

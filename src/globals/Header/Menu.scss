@@ -1,9 +1,25 @@
+@import '../../variables';
+
 .navbar-toggler {
   margin-left: auto;
 }
 
+.navbar-toggler-icon {
+  color: $secondary-op!important;
+}
+
 #log-menu {
   margin-left: auto;
+  font-size: 1.2rem!important;
+}
+
+.nav-link.active {
+  color: $warm-color!important;
+}
+
+.nav-link {
+  color: $warm-op!important;
+  text-shadow: $dark-shadow;
 }
 
 .dropdown-menu {

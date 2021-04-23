@@ -5,19 +5,12 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
-import {
-  Link,
-  useRouteMatch,
-  Redirect,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { useState } from "react";
 import axios from "axios";
 
-function LoginCard(props) {
-  const history = useHistory();
+function LoginCard() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +37,7 @@ function LoginCard(props) {
       .catch((error) => {
         console.log(error);
         setIsLoading(false);
-        setPassword('');
+        setPassword("");
         if (error.response.status == 401) {
           setError(true);
         }
@@ -125,4 +118,4 @@ function LoginCard(props) {
   );
 }
 
-export default LoginCard;
+export default withRouter(LoginCard);

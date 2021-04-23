@@ -1,11 +1,4 @@
 import "./Homepage.scss";
-import {
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
 import { Container, Row, Col, Badge } from "react-bootstrap";
 import BrandLogo from "../../globals/Header/BrandLogo";
 import SearchBar from "../../globals/Header/SearchBar";
@@ -69,20 +62,20 @@ function Homepage() {
   return (
     <Container fluid className="page-container homepage">
       <Row className="home-header mb-1 pt-2">
-        <Col xs={6} sm={6} md={4} xl={3} className='d-flex logo-header'>
+        <Col xs={6} sm={6} md={4} xl={3} className="d-flex logo-header">
           <BrandLogo />
         </Col>
         <Col className="align-self-center search-bar">
-          <SearchBar md={4} xl={6}/>
+          <SearchBar md={4} xl={6} />
         </Col>
-        <Col xs={6} sm={6} md={4} xl={3} className='menu'>
+        <Col xs={6} sm={6} md={4} xl={3} className="menu">
           <Menu />
         </Col>
       </Row>
 
       <Row className="home-main justify-content-center">
         <Col md={3} className="text-center side-posts">
-          <Badge pill variant="dark" className="mb-4">
+          <Badge pill variant="danger" className="mb-4 p-2">
             Votre dernier post :
           </Badge>
           {loaded && lastPost && (
@@ -109,6 +102,11 @@ function Homepage() {
               comments={lastPost.comments ? lastPost.comments : []}
               likesNumber={lastPost.likes ? lastPost.likes : ""}
               updateComments={updateComments}
+              userLiked={
+                lastPost?.likedUsers?.find((u) => u.id == user.userId)
+                  ? true
+                  : false
+              }
             />
           )}
         </Col>
@@ -125,7 +123,7 @@ function Homepage() {
           </Row>
         </Col>
         <Col md={3} className="text-center side-posts">
-          <Badge pill variant="dark" className="mb-4">
+          <Badge pill variant="danger" className="mb-4 p-2">
             Post le plus aimé :
           </Badge>
           {loaded && mostLikedPost && (
@@ -152,6 +150,11 @@ function Homepage() {
               comments={mostLikedPost.comments ? mostLikedPost.comments : []}
               likesNumber={mostLikedPost.likes ? mostLikedPost.likes : ""}
               updateComments={updateComments}
+              userLiked={
+                mostLikedPost?.likedUsers?.find((u) => u.id == user.userId)
+                  ? true
+                  : false
+              }
             />
           )}
         </Col>

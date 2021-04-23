@@ -6,10 +6,10 @@ function ProfilePosts(props) {
   const user = JSON.parse(userStorage);
   const userPosts = props.posts;
   const [posts, setPosts] = useState([]);
-  
-    useEffect(() => {
-        setPosts(userPosts);
-    }, []);
+
+  useEffect(() => {
+    setPosts(userPosts);
+  }, []);
 
   console.log(posts);
 

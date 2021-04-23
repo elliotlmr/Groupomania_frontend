@@ -7,7 +7,6 @@ import {
   InputGroup,
   FormControl,
   Col,
-  Dropdown,
   Modal,
 } from "react-bootstrap";
 import ModifyPost from "./ModifyPost";
@@ -16,7 +15,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-//Accepte en props : id, authorId, postId, profilePicture, author, dexcription, mediaUrl.
+//Accepte en props : id, authorId, postId, profilePicture, author, description, mediaUrl, likesNumber, usersLiked, comments, commentsNumber, updateComments.
 
 function MainPost(props) {
   const userStorage = localStorage.getItem("user");
@@ -27,6 +26,7 @@ function MainPost(props) {
   const [deleted, setDeleted] = useState(false);
   const [modify, setModify] = useState(false);
   const [isModified, setIsModified] = useState({});
+  const [postLikes, setPostLikes] = useState(props.likesNumber);
   const [isLiked, setIsLiked] = useState(props.userLiked);
   const { updateComments } = props;
 
@@ -99,7 +99,7 @@ function MainPost(props) {
       .then((res) => {
         updateComments(props.postId, res.data);
         console.log(res.data);
-        setComment('');
+        setComment("");
       })
       .catch((error) => console.log(error));
   }
@@ -121,6 +121,8 @@ function MainPost(props) {
         .then((res) => {
           console.log(res.data);
           setIsLiked(false);
+          setPostLikes(postLikes - 1);
+          console.log(postLikes);
         })
         .catch((error) => console.log(error));
     }
@@ -140,6 +142,7 @@ function MainPost(props) {
         .then((res) => {
           console.log(res.data);
           setIsLiked(true);
+          setPostLikes(postLikes ? postLikes + 1 : 1);
         })
         .catch((error) => console.log(error));
     }
@@ -147,7 +150,7 @@ function MainPost(props) {
 
   return (
     <>
-      <Modal show={showImage} onHide={closeImage} className='modal-container'>
+      <Modal show={showImage} onHide={closeImage} className="modal-container">
         <button
           type="button"
           name="Close Image"
@@ -190,7 +193,10 @@ function MainPost(props) {
                   className="profile-picture-post mr-4"
                 />
                 <Link to={`/profile/${props.authorId}`}>
-                  <Card.Title className="my-auto"> {props.author} </Card.Title>
+                  <Card.Title className="my-auto post-author">
+                    {" "}
+                    {props.author}{" "}
+                  </Card.Title>
                 </Link>
               </Col>
               <Col
@@ -260,7 +266,7 @@ function MainPost(props) {
               onClick={toggleImage}
             />
           </Card.Body>
-          <Card.Footer className="pt-0">
+          <Card.Footer className="pt-0 card-footer">
             <Row className="my-2">
               <Col sm={6} className="px-0 mt-auto">
                 <Button
@@ -293,11 +299,7 @@ function MainPost(props) {
                       d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                     />
                   </svg>
-                  {props.likesNumber ? (
-                    <span className="ml-2">{props.likesNumber}</span>
-                  ) : (
-                    ""
-                  )}
+                  {postLikes && <span className="ml-2">{postLikes}</span>}
                 </Button>
                 <Button type="button" className="mx-1">
                   <svg

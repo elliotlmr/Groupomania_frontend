@@ -11,40 +11,41 @@ function PostsList() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const result = await axios.get("http://localhost:1331/api/posts", {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then(res => {
-        setPosts(res.data)})
-      .catch(error => {
-        console.log(error);
-        if (error.response.status == 401) {
-          localStorage.clear();
-          window.location = '/';
-        }
-      });
-
-      //setPosts(result.data);
+      const result = await axios
+        .get("http://localhost:1331/api/posts", {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        })
+        .then((res) => {
+          setPosts(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.status == 401) {
+            localStorage.clear();
+            window.location = "/";
+          }
+        });
     };
 
     fetchPosts();
   }, []);
 
   const updatePosts = () => {
-    axios.get('http://localhost:1331/api/posts/last', {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    })
-    .then((res) => {
-      let post = res.data[0];
-      let copyPosts = [...posts];
-      copyPosts = copyPosts.concat([post]);
-      copyPosts.unshift(copyPosts.pop());
-      setPosts(copyPosts);
-    })
+    axios
+      .get("http://localhost:1331/api/posts/last", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((res) => {
+        let post = res.data[0];
+        let copyPosts = [...posts];
+        copyPosts = copyPosts.concat([post]);
+        copyPosts.unshift(copyPosts.pop());
+        setPosts(copyPosts);
+      });
   };
 
   const updateComments = (postId, comment) => {
@@ -62,10 +63,10 @@ function PostsList() {
           updatePosts={updatePosts}
         />
       </Row>
-      <Row className='w-100 mx-auto'>
+      <Row className="w-100 mx-auto">
         {posts.map((post) => (
           <Post
-            key={post.id ? post.id : 'dynamicKey' }
+            key={post.id ? post.id : "dynamicKey"}
             id={post.id}
             authorId={post.userId}
             postId={post.id}
@@ -81,9 +82,11 @@ function PostsList() {
             mediaUrl={post.mediaUrl}
             commentsNumber={post.comments ? post.comments.length : "0"}
             comments={post.comments ? post.comments : []}
-            likesNumber={!post.likes || post.likes == 0 ? '' : post.likes}
+            likesNumber={!post.likes || post.likes == 0 ? "" : post.likes}
             updateComments={updateComments}
-            userLiked={post.likedUsers.find((u) => u.userId == user.userId) ? true : false}
+            userLiked={
+              post.likedUsers.find((u) => u.id == user.userId) ? true : false
+            }
           />
         ))}
       </Row>

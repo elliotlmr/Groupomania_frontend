@@ -1,8 +1,10 @@
 import "./Comment.scss";
 import axios from "axios";
-import { Button, Card, InputGroup, FormControl } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import ModifyComment from "./ModifyComment/ModifyComment";
 import { useState } from "react";
+
+//Accepte en props commentId, postId, authorId, author, comment.
 
 function Comment(props) {
   const userStorage = localStorage.getItem("user");
@@ -51,14 +53,14 @@ function Comment(props) {
   return (
     <>
       {isDeleted ? (
-        <Card className='w-100 text-center py-3'>
+        <Card className="w-100 text-center py-3">
           <Card.Text>Commentaire supprimé !</Card.Text>
         </Card>
       ) : (
         <Card id={props.id} className="w-100">
-          <Card.Body className="pt-0">
-            <Card.Title className="mb-2 text-muted d-flex justify-content-between">
-              <div>{props.author}</div>
+          <Card.Body className="pt-0 comment-body">
+            <Card.Title className="mb-2 d-flex justify-content-between">
+              <div className="comment-author">{props.author}</div>
               <div>
                 {userIsAuthor() && (
                   <>

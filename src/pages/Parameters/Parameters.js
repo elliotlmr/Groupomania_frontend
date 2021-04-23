@@ -13,7 +13,6 @@ import {
 import FooterMenu from "../../globals/Footer/FooterMenu";
 import BrandLogo from "../../globals/Header/BrandLogo";
 import Menu from "../../globals/Header/Menu";
-import SearchBar from "../../globals/Header/SearchBar";
 import FileInput from "../../globals/components/FileInput";
 
 function Parameters() {
@@ -243,7 +242,7 @@ function Parameters() {
                 variant="danger"
                 type="button"
                 onClick={handleShow}
-                className="mx-auto my-1"
+                className="mx-auto my-1 delete-account-btn"
               >
                 Supprimer
               </Button>

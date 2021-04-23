@@ -2,7 +2,16 @@
 
 .create-post {
   background-color: rgba(250, 250, 250, 0.3) !important;
-  box-shadow: 2px 2px 5px $primary-color;
+  box-shadow: 2px 2px 5px $blue-color;
+}
+
+.create-header {
+  background-color: $blue-op!important;
+}
+
+.btn-primary {
+  background-color: $blue-light!important;
+  box-shadow: $dark-shadow;
 }
 
 .profile-picture {

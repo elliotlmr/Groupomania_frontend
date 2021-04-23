@@ -3,16 +3,14 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { LinkContainer } from "react-router-bootstrap";
-import { Redirect, useHistory } from "react-router-dom";
 
 function Menu() {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
-  const history = useHistory();
 
   function handleLogout() {
     localStorage.clear();
-    window.location = '/';
+    window.location = "/";
   }
 
   return (
@@ -31,7 +29,10 @@ function Menu() {
               <NavDropdown.Item> Paramètres </NavDropdown.Item>
             </LinkContainer>
             <NavDropdown.Divider />
-            <NavDropdown.Item onClick={handleLogout}> Déconnexion </NavDropdown.Item>
+            <NavDropdown.Item onClick={handleLogout}>
+              {" "}
+              Déconnexion{" "}
+            </NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>

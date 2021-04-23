@@ -6,7 +6,7 @@ function SearchBar() {
   return (
     <Form inline className="justify-content-center">
       <FormControl type="text" placeholder="Rechercher..." className="w-50" />
-      <Button variant="dark">
+      <Button variant="danger">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"

@@ -1,8 +1,5 @@
 import "./FooterMenu.scss";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { LinkContainer } from "react-router-bootstrap";
 import { Col, Row } from "react-bootstrap";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function FooterMenu() {

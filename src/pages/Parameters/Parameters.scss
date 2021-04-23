@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .parameters {
     padding: 0 10%!important;
 }
@@ -11,4 +13,8 @@
 .error-msg {
     color: rgba(255, 0, 0, 0.5);
     text-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.delete-account-btn {
+    box-shadow: $dark-shadow;
 }

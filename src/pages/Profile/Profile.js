@@ -1,5 +1,5 @@
 import "./Profile.scss";
-import { Container, Row, Col, Card, Image } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import BrandLogo from "../../globals/Header/BrandLogo";
 import SearchBar from "../../globals/Header/SearchBar";
 import Menu from "../../globals/Header/Menu";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProfilePosts from "./components/ProfilePosts";
 
-function Profile(props) {
+function Profile() {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
   const [userProfile, setUserProfile] = useState({});
@@ -57,7 +57,14 @@ function Profile(props) {
             className="user-card"
           />
         </Col>
-        <Col xs={12} sm={12} md={8} xl={6} className="px-5 posts-list" id="postsList">
+        <Col
+          xs={12}
+          sm={12}
+          md={8}
+          xl={6}
+          className="px-5 posts-list"
+          id="postsList"
+        >
           {loaded && <ProfilePosts posts={userProfile.posts} />}
         </Col>
       </Row>

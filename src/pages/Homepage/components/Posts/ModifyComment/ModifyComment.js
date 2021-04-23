@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FormControl, InputGroup, Button } from "react-bootstrap";
 import axios from "axios";
 
+//Accepte en props placeholder.
+
 function ModifyComment(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
