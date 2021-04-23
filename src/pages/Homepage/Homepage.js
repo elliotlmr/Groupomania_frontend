@@ -24,7 +24,6 @@ function Homepage() {
         },
       })
       .then((res) => {
-        console.log("Dernier post chargé !");
         setLastPost(res.data[0]);
       })
       .catch((error) => console.log(error));
@@ -36,7 +35,6 @@ function Homepage() {
         },
       })
       .then((res) => {
-        console.log("Post le plus aimé chargé !");
         setMostLikedPost(res.data[0]);
       })
       .catch((error) => console.log(error));

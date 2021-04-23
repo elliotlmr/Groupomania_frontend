@@ -46,7 +46,6 @@ function MainPost(props) {
         },
       })
       .then((res) => {
-        console.log(res);
         setDeleted(true);
       })
       .catch((error) => console.log(error));
@@ -64,7 +63,6 @@ function MainPost(props) {
 
   const finishModify = (newText) => {
     setIsModified(newText);
-    console.log(newText);
     setModify(false);
   };
 
@@ -98,7 +96,6 @@ function MainPost(props) {
       )
       .then((res) => {
         updateComments(props.postId, res.data);
-        console.log(res.data);
         setComment("");
       })
       .catch((error) => console.log(error));
@@ -119,10 +116,8 @@ function MainPost(props) {
           }
         )
         .then((res) => {
-          console.log(res.data);
           setIsLiked(false);
           setPostLikes(postLikes - 1);
-          console.log(postLikes);
         })
         .catch((error) => console.log(error));
     }
@@ -140,7 +135,6 @@ function MainPost(props) {
           }
         )
         .then((res) => {
-          console.log(res.data);
           setIsLiked(true);
           setPostLikes(postLikes ? postLikes + 1 : 1);
         })

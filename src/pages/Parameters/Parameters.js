@@ -36,7 +36,6 @@ function Parameters() {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setInfos(res.data);
         setRole(res.data.company_role);
       })
@@ -70,7 +69,6 @@ function Parameters() {
         },
       })
       .then((res) => {
-        console.log(res);
         setProfilePic(res.data.profile_picture);
         let pictureStorage = localStorage.getItem("user");
         pictureStorage = JSON.parse(pictureStorage);

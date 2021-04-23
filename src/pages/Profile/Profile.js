@@ -28,7 +28,6 @@ function Profile() {
         }
       )
       .then((res) => {
-        console.log("profile", res.data);
         setUserProfile(res.data);
         setLoaded(true);
       });

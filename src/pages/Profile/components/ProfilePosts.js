@@ -11,8 +11,6 @@ function ProfilePosts(props) {
     setPosts(userPosts);
   }, []);
 
-  console.log(posts);
-
   const updateComments = (postId, comment) => {
     let copyPosts = [...posts];
     let post = copyPosts.find((p) => p.id == postId);
@@ -40,7 +38,11 @@ function ProfilePosts(props) {
           mediaUrl={post.mediaUrl}
           commentsNumber={post.comments ? post.comments.length : "0"}
           comments={post.comments ? post.comments : []}
+          likesNumber={!post.likes || post.likes == 0 ? "" : post.likes}
           updateComments={updateComments}
+          userLiked={
+            post?.likedUsers?.find((u) => u.id == user.userId) ? true : false
+          }
         />
       ))}
     </>
