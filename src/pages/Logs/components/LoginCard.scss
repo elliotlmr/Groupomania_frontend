@@ -1,4 +1,7 @@
+@import '../../../variables'; 
+
 .login-card {
     background-color: rgba(250, 250, 250, 0.7)!important;
     backdrop-filter: blur(5px);
+    box-shadow: $dark-shadow;
 }

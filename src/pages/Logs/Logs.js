@@ -35,7 +35,7 @@ function Logs() {
         </Col>
       </Row>
 
-      <Row className="logs-footer fixed-bottom">
+      <Row className="logs-footer">
         <Col>
           <FooterMenu />
         </Col>
