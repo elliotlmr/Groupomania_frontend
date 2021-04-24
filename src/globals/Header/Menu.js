@@ -22,7 +22,7 @@ function Menu() {
             <Nav.Link> Accueil </Nav.Link>
           </LinkContainer>
           <LinkContainer to={`/profile/${user.userId}`}>
-            <Nav.Link> Profile </Nav.Link>
+            <Nav.Link> Profil </Nav.Link>
           </LinkContainer>
           <NavDropdown title="Options" id="dropdown-menu">
             <LinkContainer to="/parameters">
