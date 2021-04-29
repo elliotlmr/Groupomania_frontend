@@ -6,11 +6,11 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
-function LoginCard() {
+function LoginCard(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,8 @@ function LoginCard() {
         console.log(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
         setIsLoading(true);
-        window.location = "/home";
+        props.history.push('/home');
+        //window.location = "/home";
       })
       .catch((error) => {
         console.log(error);

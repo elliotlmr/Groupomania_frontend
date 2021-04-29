@@ -3,14 +3,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { LinkContainer } from "react-router-bootstrap";
+import { withRouter } from "react-router-dom";
 
-function Menu() {
+function Menu(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
 
   function handleLogout() {
     localStorage.clear();
-    window.location = "/";
+    props.history.push("/");
+    //window.location = "/";
   }
 
   return (
@@ -40,4 +42,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default withRouter(Menu);
