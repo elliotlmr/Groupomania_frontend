@@ -1,6 +1,6 @@
-##Comment initialiser l'application :  
+##Comment installer l'application :  
   
-Dans un dossier "Groupomania" préalablement créé sur votre ordinateur..  
+Dans un dossier "Groupomania" préalablement créé sur votre ordinateur (contenant également le dossier "backend")..  
   
 -> Clonez le repository "frontend".  
 -> Accédez au dossier "frontend" depuis la console : cd Groupomania/frontend  
