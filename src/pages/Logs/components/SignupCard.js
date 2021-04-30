@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { Alert, InputGroup } from "react-bootstrap";
 
 function SignupCard(props) {
   const [firstname, setFirstname] = useState("");
@@ -15,6 +16,7 @@ function SignupCard(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [error, setError] = useState(false);
 
   function isValid() {
     return (
@@ -41,6 +43,11 @@ function SignupCard(props) {
         console.log(res);
         props.history.push("/");
         //window.location = "/";
+        setError(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(true);
       });
   }
 
@@ -193,6 +200,23 @@ function SignupCard(props) {
             </Button>
           </Form>
         </Col>
+
+        {error && (
+          <Alert variant="danger">
+            <p>
+              Votre email ou votre mot de passe ne sont pas valides ! Veillez à
+              respecter les conditions de validation.
+            </p>
+            <p>
+              Mot de passe : <br />
+              .Entre 8 et 30 caractères <br />
+              .Minimum une majuscule <br />
+              .Minimum une minuscule <br />
+              .Minimum un chiffre 0-9 <br />
+              .Pas d'espace
+            </p>
+          </Alert>
+        )}
 
         <Card.Text className="text-center">
           Déjà inscrit ? Connectez-vous <Link to={`/`}>ici !</Link>
