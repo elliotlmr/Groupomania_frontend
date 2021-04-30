@@ -32,7 +32,7 @@ function LoginCard(props) {
         console.log(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
         setIsLoading(true);
-        props.history.push('/home');
+        props.history.push("/home");
         //window.location = "/home";
       })
       .catch((error) => {

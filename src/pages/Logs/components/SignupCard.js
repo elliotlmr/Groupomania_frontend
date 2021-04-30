@@ -4,11 +4,11 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-function SignupCard() {
+function SignupCard(props) {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [role, setRole] = useState("");
@@ -39,7 +39,8 @@ function SignupCard() {
       })
       .then((res) => {
         console.log(res);
-        window.location = "/";
+        props.history.push("/");
+        //window.location = "/";
       });
   }
 
@@ -201,4 +202,4 @@ function SignupCard() {
   );
 }
 
-export default SignupCard;
+export default withRouter(SignupCard);

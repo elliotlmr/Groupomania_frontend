@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Row from "react-bootstrap/Row";
+import { withRouter } from "react-router-dom";
 import CreatePost from "../CreatePost";
 import Post from "./Post";
 
-function PostsList() {
+function PostsList(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
   const [posts, setPosts] = useState([]);
@@ -24,7 +25,8 @@ function PostsList() {
           console.log(error);
           if (error.response.status == 401) {
             localStorage.clear();
-            window.location = "/";
+            props.history.push("/");
+            //window.location = "/";
           }
         });
     };
@@ -94,4 +96,4 @@ function PostsList() {
   );
 }
 
-export default PostsList;
+export default withRouter(PostsList);

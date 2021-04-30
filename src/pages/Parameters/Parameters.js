@@ -14,8 +14,9 @@ import FooterMenu from "../../globals/Footer/FooterMenu";
 import BrandLogo from "../../globals/Header/BrandLogo";
 import Menu from "../../globals/Header/Menu";
 import FileInput from "../../globals/components/FileInput";
+import { withRouter } from "react-router-dom";
 
-function Parameters() {
+function Parameters(props) {
   const userStorage = localStorage.getItem("user");
   const user = JSON.parse(userStorage);
   const [infos, setInfos] = useState({});
@@ -96,7 +97,8 @@ function Parameters() {
           setUserIsDeleted(true);
           setTimeout(function () {
             localStorage.clear();
-            window.location = "/signup";
+            props.history.push("/signup");
+            //window.location = "/signup";
           }, 2000);
         }
       })
@@ -258,4 +260,4 @@ function Parameters() {
   );
 }
 
-export default Parameters;
+export default withRouter(Parameters);
